@@ -1,0 +1,23 @@
+# 使用官方的 Golang 基础镜像
+FROM golang:1.20-alpine as builder
+
+# 设置工作目录
+WORKDIR /app
+
+# 将源代码复制到容器中
+COPY . .
+
+# 编译 Go 程序
+RUN go build -o cloud-native-demo ./cmd/
+
+# 创建最终的运行时镜像
+FROM alpine:latest
+
+# 设置工作目录
+WORKDIR /app
+
+# 从构建阶段拷贝可执行文件
+COPY --from=builder /app/cloud-native-demo .
+
+# 设置容器启动时执行的命令
+CMD ["./cloud-native-demo"]

@@ -1,0 +1,12 @@
+.idea
+.DS_store
+build_debug.sh
+debug.sh
+kill_dlv.sh
+log.txt
+output/
+main
+*.log
+debug/
+pkg/consumer/log/
+**/__pycache__/
